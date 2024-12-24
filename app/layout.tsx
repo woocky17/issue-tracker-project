@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "./NavBar";
 import "./theme-config.css";
+import AuthProvider from "@/app/auth/Provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,8 +33,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Theme accentColor="brown" grayColor="mauve" radius="large">
-          <NavBar />
-          <main className="p-5">{children}</main>
+          <AuthProvider>
+            <NavBar />
+            <main className="p-5">{children}</main>
+          </AuthProvider>
         </Theme>
       </body>
     </html>
