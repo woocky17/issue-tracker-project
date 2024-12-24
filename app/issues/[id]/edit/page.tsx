@@ -10,11 +10,11 @@ const IssueForm = dynamic(() => import("@/app/issues/_components/IssueForm"), {
   loading: () => <IssueFormSkeleton />,
 });
 
-interface Props {
+const EditIssuePage = async ({
+  params,
+}: {
   params: Promise<{ id: string }>;
-}
-
-const EditIssuePage = async ({ params }: Props) => {
+}) => {
   const { id } = await params;
 
   const issue = await prisma.issue.findUnique({
