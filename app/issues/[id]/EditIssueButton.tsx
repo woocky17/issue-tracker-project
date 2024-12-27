@@ -1,12 +1,20 @@
+"use client";
+
+import { Spinner } from "@/app/components";
 import { Pencil2Icon } from "@radix-ui/react-icons";
 import { Button } from "@radix-ui/themes";
 import Link from "next/link";
+import { useState } from "react";
 
 const EditIssueButton = ({ issueId }: { issueId: number }) => {
+  const [isLoading, setLoading] = useState(false);
   return (
-    <Button>
+    <Button disabled={isLoading}>
       <Pencil2Icon />
-      <Link href={`/issues/edit/${issueId}`}>Edit Issue</Link>
+      <Link onClick={() => setLoading(true)} href={`/issues/edit/${issueId}`}>
+        Edit Issue
+      </Link>
+      {isLoading && <Spinner />}
     </Button>
   );
 };
