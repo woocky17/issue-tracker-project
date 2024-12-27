@@ -9,7 +9,7 @@ import IssueStatusFilter from "./IssueStatusFilter";
 const IssueToolBar = () => {
   const [isLoading, setLoading] = useState(false);
   return (
-    <Flex justify={"between"} mb="5">
+    <Flex justify={"between"}>
       <IssueStatusFilter />
       <Button disabled={isLoading}>
         <Link href="/issues/new" onClick={() => setLoading(true)}>
