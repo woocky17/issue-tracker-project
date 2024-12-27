@@ -1,21 +1,23 @@
 "use client";
 
 import { Spinner } from "@/app/components";
-import { Button } from "@radix-ui/themes";
+import { Button, Flex } from "@radix-ui/themes";
 import Link from "next/link";
 import React, { useState } from "react";
+import IssueStatusFilter from "./IssueStatusFilter";
 
 const IssueToolBar = () => {
   const [isLoading, setLoading] = useState(false);
   return (
-    <div className="mb-5">
+    <Flex justify={"between"} mb="5">
+      <IssueStatusFilter />
       <Button disabled={isLoading}>
         <Link href="/issues/new" onClick={() => setLoading(true)}>
           New Issue
         </Link>
         {isLoading && <Spinner />}
       </Button>
-    </div>
+    </Flex>
   );
 };
 
