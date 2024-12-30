@@ -8,11 +8,11 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/app/auth/authOptions";
 import AssigneeSelect from "./AssigneeSelect";
 
-const IssueDetailPage = async ({
-  params,
-}: {
+interface Props {
   params: Promise<{ id: string }>;
-}) => {
+}
+
+const IssueDetailPage = async ({ params }: Props) => {
   const session = await getServerSession(authOptions);
 
   const { id } = await params;
@@ -40,5 +40,18 @@ const IssueDetailPage = async ({
     </Grid>
   );
 };
+
+export async function generateMetadata({ params }: Props) {
+  const { id } = await params;
+
+  const issue = await prisma.issue.findUnique({
+    where: { id: parseInt(id) },
+  });
+
+  return {
+    title: issue?.title,
+    description: "Details of the issue " + issue?.id,
+  };
+}
 
 export default IssueDetailPage;
