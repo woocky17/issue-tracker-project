@@ -8,7 +8,6 @@ import NextLink from "next/link";
 export interface IssueQuery {
   status: Status;
   orderBy: keyof Issue;
-  page: string;
 }
 
 interface Props {
@@ -17,7 +16,7 @@ interface Props {
 }
 
 const IssueTable = async ({ searchParams, issues }: Props) => {
-  const { status, orderBy, page } = await searchParams;
+  const { status, orderBy } = await searchParams;
 
   return (
     <Table.Root variant="surface">
