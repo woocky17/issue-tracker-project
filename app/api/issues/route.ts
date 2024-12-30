@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
       title: body.title,
       description: body.description,
       createdAt: new Date(),
+      updatedAt: new Date(),
     },
   });
 
