@@ -9,6 +9,5 @@ export default async function Home() {
     where: { status: "IN_PROGRESS" },
   });
   const closed = await prisma.issue.count({ where: { status: "CLOSED" } });
-  // return <IssueChart open={open} inProgress={inProgress} closed={closed} />;
-  return <IssueSummary open={open} inProgress={inProgress} closed={closed} />;
+  return <IssueChart open={open} inProgress={inProgress} closed={closed} />;
 }
