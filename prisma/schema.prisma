@@ -10,10 +10,10 @@ datasource db {
 model Issue {
   id               Int      @id @default(autoincrement())
   title            String   @db.VarChar(255)
-  description      String // Eliminamos @db.Text porque no es compatible con MySQL 5.5
+  description      String   @db.Text
   status           Status   @default(OPEN)
   createdAt        DateTime @default(now())
-  updatedAt        DateTime // Eliminamos @updatedAt, ya que no es compatible
+  updatedAt        DateTime @updatedAt
   assignedToUserId String?  @db.VarChar(255)
   assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
 }
@@ -36,7 +36,7 @@ model User {
   Authenticator Authenticator[] // Para WebAuthn (opcional)
 
   createdAt      DateTime @default(now())
-  updatedAt      DateTime // Eliminamos @updatedAt
+  updatedAt      DateTime @updatedAt
   assignedIssues Issue[]
 }
 
@@ -46,18 +46,18 @@ model Account {
   type                     String
   provider                 String
   providerAccountId        String
-  refresh_token            String? // Eliminamos @db.Text
-  access_token             String? // Eliminamos @db.Text
+  refresh_token            String? @db.Text
+  access_token             String? @db.Text
   expires_at               Int?
   token_type               String?
   scope                    String?
-  id_token                 String? // Eliminamos @db.Text
+  id_token                 String? @db.Text
   session_state            String?
   refresh_token_expires_in Int?
   user                     User?   @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
-  updatedAt DateTime // Eliminamos @updatedAt
+  updatedAt DateTime @updatedAt
 
   @@unique([provider, providerAccountId])
   @@index([userId])
@@ -71,7 +71,7 @@ model Session {
   user         User     @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
-  updatedAt DateTime // Eliminamos @updatedAt
+  updatedAt DateTime @updatedAt
 
   @@index([userId])
 }
@@ -84,6 +84,7 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+// Optional for WebAuthn support
 model Authenticator {
   credentialID         String  @unique
   userId               String

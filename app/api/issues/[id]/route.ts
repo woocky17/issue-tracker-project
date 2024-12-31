@@ -41,7 +41,6 @@ export async function PATCH(
       title,
       description,
       assignedToUserId,
-      updatedAt: new Date(),
     },
   });
 

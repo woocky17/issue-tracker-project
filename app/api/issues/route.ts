@@ -17,8 +17,6 @@ export async function POST(request: NextRequest) {
     data: {
       title: body.title,
       description: body.description,
-      createdAt: new Date(),
-      updatedAt: new Date(),
     },
   });
 
